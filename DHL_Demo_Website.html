@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DHL Express Latvia — STUDY DEMO PROJECT</title>
+<style>
+  /* STUDY/DEMO PROJECT — RAI Bachelor Assignment */
+  :root {
+    --dhl-red: #CC0000;
+    --dhl-yellow: #FFCC00;
+    --dark: #1a1a1a;
+    --mid: #444;
+    --light-bg: #f8f8f8;
+    --white: #ffffff;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: 'Segoe UI', Arial, sans-serif; color: var(--dark); line-height: 1.6; }
+
+  /* DEMO BANNER */
+  .demo-banner {
+    background: #1a1a1a; color: var(--dhl-yellow); text-align: center;
+    padding: 8px; font-size: 12px; font-weight: bold; letter-spacing: 1px;
+  }
+
+  /* HEADER */
+  header {
+    background: var(--dhl-red); padding: 0;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+  }
+  .header-top {
+    display: flex; align-items: center; justify-content: space-between;
+    max-width: 1200px; margin: 0 auto; padding: 15px 20px;
+  }
+  .logo { display: flex; align-items: center; gap: 12px; }
+  .logo-box {
+    background: var(--dhl-yellow); color: var(--dark);
+    font-size: 28px; font-weight: 900; padding: 6px 14px;
+    letter-spacing: -1px; border-radius: 4px;
+  }
+  .logo-text { color: white; font-size: 14px; }
+  .logo-text span { display: block; font-size: 10px; opacity: 0.8; }
+  nav { display: flex; gap: 5px; }
+  nav a {
+    color: white; text-decoration: none; padding: 8px 14px;
+    border-radius: 4px; font-size: 14px; transition: background 0.2s;
+  }
+  nav a:hover { background: rgba(255,255,255,0.2); }
+
+  /* HERO */
+  .hero {
+    background: linear-gradient(135deg, var(--dhl-red) 0%, #8B0000 60%, #1a1a1a 100%);
+    color: white; padding: 80px 20px; text-align: center; position: relative; overflow: hidden;
+  }
+  .hero::before {
+    content: ''; position: absolute; top: -50%; right: -10%;
+    width: 600px; height: 600px; border-radius: 50%;
+    background: rgba(255,204,0,0.08); pointer-events: none;
+  }
+  .hero h1 { font-size: 48px; font-weight: 900; margin-bottom: 15px; line-height: 1.1; }
+  .hero h1 span { color: var(--dhl-yellow); }
+  .hero p { font-size: 20px; opacity: 0.9; margin-bottom: 35px; max-width: 600px; margin-left: auto; margin-right: auto; }
+  .hero-buttons { display: flex; gap: 15px; justify-content: center; flex-wrap: wrap; }
+  .btn-primary {
+    background: var(--dhl-yellow); color: var(--dark);
+    padding: 15px 35px; border: none; border-radius: 6px;
+    font-size: 16px; font-weight: 700; cursor: pointer; text-decoration: none;
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+  .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(255,204,0,0.4); }
+  .btn-outline {
+    background: transparent; color: white;
+    padding: 15px 35px; border: 2px solid white; border-radius: 6px;
+    font-size: 16px; font-weight: 600; cursor: pointer; text-decoration: none;
+    transition: background 0.2s;
+  }
+  .btn-outline:hover { background: rgba(255,255,255,0.15); }
+
+  /* QUICK TRACK WIDGET */
+  .track-bar {
+    background: var(--dark); padding: 25px 20px;
+  }
+  .track-inner {
+    max-width: 900px; margin: 0 auto;
+    display: flex; gap: 10px; align-items: center; flex-wrap: wrap;
+  }
+  .track-bar label { color: var(--dhl-yellow); font-weight: 600; font-size: 14px; white-space: nowrap; }
+  .track-input {
+    flex: 1; min-width: 280px; padding: 12px 16px;
+    border: 2px solid #444; background: #2a2a2a; color: white;
+    border-radius: 6px; font-size: 15px;
+  }
+  .track-input:focus { outline: none; border-color: var(--dhl-yellow); }
+  .btn-track {
+    background: var(--dhl-red); color: white; padding: 12px 28px;
+    border: none; border-radius: 6px; font-size: 15px; font-weight: 600;
+    cursor: pointer; white-space: nowrap;
+  }
+
+  /* SERVICES */
+  section { padding: 70px 20px; }
+  .section-title { text-align: center; margin-bottom: 50px; }
+  .section-title h2 { font-size: 36px; color: var(--dhl-red); margin-bottom: 10px; }
+  .section-title p { font-size: 17px; color: var(--mid); max-width: 600px; margin: 0 auto; }
+  .services-grid {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 25px; max-width: 1200px; margin: 0 auto;
+  }
+  .service-card {
+    background: white; border-radius: 10px; padding: 30px;
+    box-shadow: 0 3px 20px rgba(0,0,0,0.08);
+    border-top: 4px solid var(--dhl-red);
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+  .service-card:hover { transform: translateY(-5px); box-shadow: 0 10px 30px rgba(0,0,0,0.12); }
+  .service-icon { font-size: 40px; margin-bottom: 15px; }
+  .service-card h3 { font-size: 20px; margin-bottom: 10px; color: var(--dhl-red); }
+  .service-card p { font-size: 14px; color: var(--mid); line-height: 1.7; }
+  .service-tag {
+    display: inline-block; margin-top: 12px; background: var(--dhl-yellow);
+    color: var(--dark); padding: 3px 10px; border-radius: 12px; font-size: 12px; font-weight: 700;
+  }
+
+  /* SME OFFER */
+  .sme-section { background: var(--dhl-red); color: white; }
+  .sme-inner { max-width: 1100px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 50px; align-items: center; }
+  .sme-text h2 { font-size: 36px; margin-bottom: 15px; }
+  .sme-text h2 span { color: var(--dhl-yellow); }
+  .sme-text p { font-size: 17px; opacity: 0.9; margin-bottom: 25px; }
+  .sme-features { list-style: none; margin-bottom: 30px; }
+  .sme-features li { padding: 8px 0; border-bottom: 1px solid rgba(255,255,255,0.15); font-size: 15px; }
+  .sme-features li::before { content: '✓ '; color: var(--dhl-yellow); font-weight: bold; }
+  .sme-box { background: rgba(255,255,255,0.1); border-radius: 12px; padding: 30px; border: 2px solid rgba(255,204,0,0.4); }
+  .sme-box h3 { color: var(--dhl-yellow); font-size: 22px; margin-bottom: 20px; }
+  .price-item { display: flex; justify-content: space-between; padding: 10px 0; border-bottom: 1px solid rgba(255,255,255,0.15); font-size: 15px; }
+  .price-val { color: var(--dhl-yellow); font-weight: bold; }
+
+  /* STATS */
+  .stats-section { background: var(--light-bg); }
+  .stats-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; max-width: 1000px; margin: 0 auto; text-align: center; }
+  .stat-item h3 { font-size: 48px; font-weight: 900; color: var(--dhl-red); }
+  .stat-item p { font-size: 15px; color: var(--mid); }
+
+  /* GOGREEN */
+  .green-section { background: #1a3a1a; color: white; }
+  .green-inner { max-width: 900px; margin: 0 auto; text-align: center; }
+  .green-inner h2 { font-size: 36px; margin-bottom: 15px; }
+  .green-inner h2 span { color: #4CAF50; }
+  .green-inner p { font-size: 17px; opacity: 0.85; margin-bottom: 30px; }
+  .green-badges { display: flex; gap: 20px; justify-content: center; flex-wrap: wrap; }
+  .green-badge {
+    background: rgba(76,175,80,0.2); border: 2px solid #4CAF50; border-radius: 10px;
+    padding: 20px 30px; text-align: center; min-width: 180px;
+  }
+  .green-badge .num { font-size: 32px; font-weight: 900; color: #4CAF50; }
+  .green-badge p { font-size: 13px; opacity: 0.8; margin: 0; }
+
+  /* FOOTER */
+  footer { background: var(--dark); color: white; padding: 50px 20px 20px; }
+  .footer-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 30px; max-width: 1200px; margin: 0 auto 30px; }
+  .footer-col h4 { color: var(--dhl-yellow); margin-bottom: 15px; font-size: 15px; text-transform: uppercase; letter-spacing: 1px; }
+  .footer-col a { display: block; color: rgba(255,255,255,0.7); text-decoration: none; margin-bottom: 8px; font-size: 14px; }
+  .footer-col a:hover { color: white; }
+  .footer-bottom { text-align: center; border-top: 1px solid #333; padding-top: 20px; font-size: 12px; color: rgba(255,255,255,0.5); }
+
+  @media (max-width: 768px) {
+    .hero h1 { font-size: 32px; }
+    nav { display: none; }
+    .sme-inner { grid-template-columns: 1fr; }
+    .stats-grid { grid-template-columns: repeat(2,1fr); }
+  }
+</style>
+</head>
+<body>
+
+<div class="demo-banner">⚠ STUDY / DEMO PROJECT — RAI Bachelor Assignment: Marketing in Transport | Not a real commercial website</div>
+
+<header>
+  <div class="header-top">
+    <div class="logo">
+      <div class="logo-box">DHL</div>
+      <div class="logo-text">Express Latvia
+        <span>Official International Courier Service [DEMO]</span>
+      </div>
+    </div>
+    <nav>
+      <a href="#">Ship</a>
+      <a href="#">Track</a>
+      <a href="#">Business</a>
+      <a href="#">GoGreen</a>
+      <a href="#">Support</a>
+    </nav>
+  </div>
+</header>
+
+<div class="track-bar">
+  <div class="track-inner">
+    <label>📦 Track Shipment:</label>
+    <input class="track-input" type="text" placeholder="Enter tracking number (e.g. 1234567890)">
+    <button class="btn-track">Track Now</button>
+  </div>
+</div>
+
+<div class="hero">
+  <h1>Ship Smarter.<br><span>Deliver Faster.</span></h1>
+  <p>DHL Express Latvia — trusted by Baltic businesses for time-definite delivery to 220+ countries worldwide.</p>
+  <div class="hero-buttons">
+    <a href="#" class="btn-primary">Get a Quote</a>
+    <a href="#" class="btn-outline">Open Business Account</a>
+  </div>
+</div>
+
+<section style="background:white;">
+  <div class="section-title">
+    <h2>Our Express Services</h2>
+    <p>Time-definite delivery solutions for every business need</p>
+  </div>
+  <div class="services-grid">
+    <div class="service-card">
+      <div class="service-icon">🌍</div>
+      <h3>Express Worldwide</h3>
+      <p>Door-to-door international delivery to 220+ countries. Documents and parcels up to 300kg. Full customs brokerage included.</p>
+      <span class="service-tag">1–3 Business Days</span>
+    </div>
+    <div class="service-card">
+      <div class="service-icon">⚡</div>
+      <h3>Express 9:00 / 10:30</h3>
+      <p>Guaranteed time-definite morning delivery for your most urgent shipments. Delivery by 9:00 or 10:30 to major EU cities.</p>
+      <span class="service-tag">Next Business Day</span>
+    </div>
+    <div class="service-card">
+      <div class="service-icon">📦</div>
+      <h3>Express Easy</h3>
+      <p>Simplified booking for SMEs shipping parcels up to 30kg. Fixed-price clarity with full tracking included.</p>
+      <span class="service-tag">EU 2 Days</span>
+    </div>
+    <div class="service-card">
+      <div class="service-icon">🏭</div>
+      <h3>Freight Express</h3>
+      <p>Air freight solutions for larger shipments (70–300kg). Priority loading and dedicated capacity on DHL's own fleet.</p>
+      <span class="service-tag">3–5 Days Global</span>
+    </div>
+  </div>
+</section>
+
+<section class="sme-section">
+  <div class="sme-inner">
+    <div class="sme-text">
+      <h2>Built for <span>Baltic SMEs</span></h2>
+      <p>Open your free DHL business account and start shipping internationally with confidence — guaranteed delivery times, real-time tracking, and dedicated support.</p>
+      <ul class="sme-features">
+        <li>15% introductory discount for the first 3 months</li>
+        <li>Volume discounts from 50 shipments/month</li>
+        <li>Free DHL packaging materials</li>
+        <li>Dedicated SME account manager (LV/RU/EN)</li>
+        <li>MyDHL+ platform: book, track, manage online</li>
+        <li>Customs clearance support included</li>
+        <li>GoGreen carbon-neutral shipping option</li>
+      </ul>
+      <a href="#" class="btn-primary">Open Free Business Account</a>
+    </div>
+    <div class="sme-box">
+      <h3>💰 SME Starter Rates</h3>
+      <div class="price-item"><span>Document (0.5kg EU)</span><span class="price-val">From €15.30</span></div>
+      <div class="price-item"><span>Parcel 2kg EU next day</span><span class="price-val">From €18.70</span></div>
+      <div class="price-item"><span>Parcel 5kg EU 2-day</span><span class="price-val">From €23.80</span></div>
+      <div class="price-item"><span>Parcel 2kg to USA/Asia</span><span class="price-val">From €38.25</span></div>
+      <p style="font-size:11px;opacity:0.7;margin-top:15px;">*SME Starter prices: 15% below standard list rates. Available for new accounts, first 3 months. Fuel surcharge applies separately.</p>
+    </div>
+  </div>
+</section>
+
+<section class="stats-section">
+  <div class="section-title">
+    <h2>DHL Express — By the Numbers</h2>
+    <p>Trusted by millions of businesses globally</p>
+  </div>
+  <div class="stats-grid">
+    <div class="stat-item"><h3>220+</h3><p>Countries & Territories Served</p></div>
+    <div class="stat-item"><h3>120K+</h3><p>DHL Express Employees</p></div>
+    <div class="stat-item"><h3>250+</h3><p>Aircraft in DHL Air Fleet</p></div>
+    <div class="stat-item"><h3>99.7%</h3><p>On-Time Delivery Rate</p></div>
+  </div>
+</section>
+
+<section class="green-section">
+  <div class="green-inner">
+    <h2>DHL <span>GoGreen</span> Solutions</h2>
+    <p>Every shipment has an environmental impact. Choose GoGreen to offset your carbon footprint and support DHL's mission to achieve net-zero emissions logistics by 2050.</p>
+    <div class="green-badges">
+      <div class="green-badge"><div class="num">2050</div><p>Net-Zero<br>Target Year</p></div>
+      <div class="green-badge"><div class="num">30%</div><p>Clean Energy<br>by 2030</p></div>
+      <div class="green-badge"><div class="num">75K+</div><p>e-Vehicles<br>by 2030</p></div>
+      <div class="green-badge"><div class="num">€7B</div><p>Sustainability<br>Investment</p></div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-grid">
+    <div class="footer-col">
+      <h4>Ship</h4>
+      <a href="#">Get a Quote</a>
+      <a href="#">Book a Shipment</a>
+      <a href="#">Schedule a Pickup</a>
+      <a href="#">Packaging Guidelines</a>
+    </div>
+    <div class="footer-col">
+      <h4>Track</h4>
+      <a href="#">Track Shipment</a>
+      <a href="#">Proof of Delivery</a>
+      <a href="#">Shipment History</a>
+    </div>
+    <div class="footer-col">
+      <h4>Business Solutions</h4>
+      <a href="#">Open Business Account</a>
+      <a href="#">MyDHL+ Platform</a>
+      <a href="#">API Integration</a>
+      <a href="#">Volume Discounts</a>
+    </div>
+    <div class="footer-col">
+      <h4>Support — Latvia</h4>
+      <a href="#">Customer Service</a>
+      <a href="#">Service Points Riga</a>
+      <a href="#">Customs Support</a>
+      <a href="#">Contact Us</a>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>⚠ STUDY / DEMO PROJECT — Created for RAI Bachelor Assignment: Marketing in Transport (SPL.206) | Not affiliated with or endorsed by Deutsche Post DHL Group | 2026</p>
+    <p style="margin-top:8px;">DHL is a registered trademark of Deutsche Post DHL Group. This website is a non-commercial educational demonstration.</p>
+  </div>
+</footer>
+
+</body>
+</html>
